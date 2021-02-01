@@ -1,29 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import Header from './components/Header';
+import TodoItem from './components/TodoItem';
+import AddTodo from './components/AddTodo';
 
 export default function App() {
-  const [temp, setTemp] = useState('')
-  const [name, setName] = useState('')
-  const changeName = () => {
-    setName(temp)
-    setTemp('')
+  const [todos, setTodos] = useState([
+    {text: 'buy coffee', key: '1'},
+    {text: 'drink milk', key: '2'},
+    {text: 'get sugar', key: '3'}
+  ])
+  const pressHandler = (key) => {
+    setTodos((prevTodos)=>{
+      return prevTodos.filter(todo=>todo.key!=key)
+    })
+  }
+  const submitHandler = (text) => {
+    setTodos((prevTodos)=>{
+      return [...prevTodos, {text: text, key: Math.random().toString()}]
+    })
   }
   return (
     <View style={styles.container}>
-      {/* <Text>Open up App.js to start working on your app!</Text> */}
-      <StatusBar style="" />
-      <View style={styles.header}>
-        <Text style={styles.title}>{name}</Text>
+      {/* header */}
+      <StatusBar style="light" />
+      <Header/>
+      <AddTodo submitHandler={submitHandler}/>
+      <View style={styles.bodycontent}>
+        {/* flatlist */}
+        <FlatList
+          data={todos}
+          renderItem={({item})=>(
+            <TodoItem item={item} pressHandler={pressHandler}/>
+          )}
+        />
       </View>
-      <Text>Enter Name: </Text>
-      <TextInput 
-        style={styles.input} 
-        placeholder="e.g Sakurajima Mai" 
-        onChangeText={(val)=>setTemp(val)} 
-        value={temp}/>
-      <Button title="change" 
-      onPress={changeName}></Button>
     </View>
   );
 }
@@ -31,24 +43,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: 'center'
   },
-  header: {
-    backgroundColor: "skyblue",
+  bodycontent: {
     padding: 20,
-    width: 200,
-    alignItems: "center"
-  },
-  title: {
-    color: "white",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "red",
-    padding: 5,
-    margin: 5,
-    width: 250,
+    margin: 0
   }
 });
