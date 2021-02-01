@@ -7,9 +7,9 @@ import AddTodo from './components/AddTodo';
 
 export default function App() {
   const [todos, setTodos] = useState([
-    {text: 'buy coffee', key: '1'},
-    {text: 'drink milk', key: '2'},
-    {text: 'get sugar', key: '3'}
+    {text: 'this is a todo', key: '1'},
+    {text: 'sample-task', key: '2'},
+    {text: 'tap me to delete', key: '3'}
   ])
   const pressHandler = (key) => {
     setTodos((prevTodos)=>{
