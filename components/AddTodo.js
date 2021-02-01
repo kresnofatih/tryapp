@@ -17,7 +17,7 @@ const AddTodo = ({submitHandler}) => {
                         submitHandler(tempTodo);
                         setTempTodo('');
                     } else {
-                        Alert.alert('OOPS!', 'Todos cannot be none', [
+                        Alert.alert('OOPS!', 'Todos cannot be left empty if submitted', [
                             {text: 'Got It', onPress: ()=>console.log('alert closed')}
                         ]);
                     }
