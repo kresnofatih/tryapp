@@ -1,15 +1,17 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { AntDesign } from '@expo/vector-icons';
 
 const TodoItem = ({item, pressHandler}) => {
     return (
-            <TouchableOpacity onPress={()=>pressHandler(item.key)}>
         <View style={styles.todoitem}>
                 <Text style={styles.todoitemtext}>
                     {item.text}
                 </Text>
-        </View>
+            <TouchableOpacity onPress={()=>pressHandler(item.key)}>
+                <AntDesign name="delete" size={24} color="orange" />
             </TouchableOpacity>
+        </View>
     )
 }
 
@@ -19,8 +21,10 @@ const styles = StyleSheet.create({
     todoitem: {
         backgroundColor: "lightgrey",
         padding: 20,
-        alignItems: 'center',
-        width: 200,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        // alignItems: 'center',
+        width: 300,
         margin: 10
     },
     todoitemtext: {

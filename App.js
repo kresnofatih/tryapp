@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 0,
     marginBottom: 20,
-    backgroundColor: 'cyan',
+    // backgroundColor: 'cyan',
     flex: 1
   }
 });
