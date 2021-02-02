@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
@@ -12,16 +12,32 @@ export default function App() {
     {text: 'sample-task', key: '2', completeStatus: false},
     {text: 'tap me to delete', key: '3', completeStatus: true}
   ])
-  const pressHandler = (key) => {
-    setTodos((prevTodos)=>{
-      return prevTodos.filter(todo=>todo.key!=key)
-    })
+  const pressHandler = (action, key) => {
+    switch(action){
+      case 'delete':
+        setTodos((prevTodos)=>{
+            return prevTodos.filter(todo=>todo.key!=key)
+        });
+      case 'toggle':
+        todos.map(todo=>{
+          if(todo.key===key){
+            return {...todo, completeStatus: !todo.completeStatus};
+          } else {
+            return todo;
+          }
+        })
+    }
   }
   const submitHandler = (text) => {
     setTodos((prevTodos)=>{
-      return [...prevTodos, {text: text, key: Math.random().toString()}]
+      return [...prevTodos, {text: text, 
+        key: Math.random().toString(), 
+        completeStatus: false}]
     })
   }
+  useEffect(()=>{
+    console.log("todos changed");
+  }, [todos])
   return (
     // <Sandbox/>
     <TouchableWithoutFeedback onPress={()=>{

@@ -13,10 +13,10 @@ const TodoItem = ({item, pressHandler}) => {
                 {item.text}
             </Text>
             <View style={styles.buttonsviews}>
-                <TouchableOpacity onPress={()=>pressHandler(item.key)}>
+                <TouchableOpacity onPress={()=>pressHandler("toggle", item.key)}>
                     <AntDesign name="checkcircle" size={24} color="black" />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>pressHandler(item.key)}>
+                <TouchableOpacity onPress={()=>pressHandler("delete", item.key)}>
                     <AntDesign name="delete" size={24} color="black" />
                 </TouchableOpacity>
             </View>
