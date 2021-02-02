@@ -18,14 +18,20 @@ export default function App() {
         setTodos((prevTodos)=>{
             return prevTodos.filter(todo=>todo.key!=key)
         });
+        break;
       case 'toggle':
-        todos.map(todo=>{
-          if(todo.key===key){
-            return {...todo, completeStatus: !todo.completeStatus};
+        const temp = []
+        for(let i=0; i<todos.length; i++){
+          if(todos[i].key===key){
+            temp.push({text: todos[i].text, 
+            key: todos[i].key, 
+            completeStatus: !todos[i].completeStatus})
           } else {
-            return todo;
+            temp.push(todos[i]);
           }
-        })
+        };
+        setTodos(temp);
+        break;
     }
   }
   const submitHandler = (text) => {
@@ -36,7 +42,7 @@ export default function App() {
     })
   }
   useEffect(()=>{
-    console.log("todos changed");
+    console.log(todos);
   }, [todos])
   return (
     // <Sandbox/>
