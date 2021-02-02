@@ -4,8 +4,12 @@ import { AntDesign } from '@expo/vector-icons';
 
 const TodoItem = ({item, pressHandler}) => {
     return (
-        <View style={styles.todoitem}>
-            <Text style={styles.todoitemtext}>
+        <View style={[styles.todoitem, !item.completeStatus ?
+        styles.todoitemColorComplete :
+        styles.todoitemColorIncomplete]}>
+            <Text style={!item.completeStatus ?
+            styles.todoitemtextComplete :
+            styles.todoitemtextIncomplete}>
                 {item.text}
             </Text>
             <View style={styles.buttonsviews}>
@@ -24,7 +28,6 @@ export default TodoItem
 
 const styles = StyleSheet.create({
     todoitem: {
-        backgroundColor: 'coral',
         padding: 20,
         flexDirection: "row",
         justifyContent: "space-between",
@@ -32,9 +35,21 @@ const styles = StyleSheet.create({
         width: 300,
         margin: 10
     },
-    todoitemtext: {
+    todoitemColorComplete: {
+        backgroundColor: "coral",
+    },
+    todoitemColorIncomplete: {
+        backgroundColor: "grey",
+    },
+    todoitemtextComplete: {
         color: 'black',
         maxWidth: 170
+    },
+    todoitemtextIncomplete: {
+        color: 'black',
+        maxWidth: 170,
+        textDecorationLine: 'line-through',
+        textDecorationStyle: 'solid',
     },
     buttonsviews: {
         width: 60,
