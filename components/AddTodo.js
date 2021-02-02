@@ -21,7 +21,7 @@ const AddTodo = ({submitHandler}) => {
                             {text: 'Got It', onPress: ()=>console.log('alert closed')}
                         ]);
                     }
-                    }} color='skyblue'/>
+                    }} color='coral'/>
             </View>
         </View>
     )
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         marginRight: 20,
         borderWidth: 1,
         borderColor: 'transparent',
-        borderBottomColor: 'skyblue',
+        borderBottomColor: 'coral',
         width: 200,
         paddingLeft: 10,
         paddingRight: 10

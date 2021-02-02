@@ -8,9 +8,9 @@ import Sandbox from './components/Sandbox';
 
 export default function App() {
   const [todos, setTodos] = useState([
-    {text: 'this is a todo', key: '1'},
-    {text: 'sample-task', key: '2'},
-    {text: 'tap me to delete', key: '3'}
+    {text: 'this is a todo', key: '1', completeStatus: false},
+    {text: 'sample-task', key: '2', completeStatus: false},
+    {text: 'tap me to delete', key: '3', completeStatus: true}
   ])
   const pressHandler = (key) => {
     setTodos((prevTodos)=>{
