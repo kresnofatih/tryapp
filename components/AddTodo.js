@@ -8,7 +8,7 @@ const AddTodo = ({submitHandler}) => {
             <View style={styles.inputbar}>
                 <TextInput
                     style={styles.inputinput}
-                    placeholder="new todo"
+                    placeholder="New todo"
                     value={tempTodo}
                     onChangeText={(val)=>setTempTodo(val)}
                 />
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     },
     inputbar: {
         // width: 300,
+        paddingTop: 20,
         justifyContent: 'space-between',
         flexDirection: 'row'
     },

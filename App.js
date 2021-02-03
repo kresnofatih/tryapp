@@ -5,19 +5,24 @@ import Header from './components/Header';
 import TodoItem from './components/TodoItem';
 import AddTodo from './components/AddTodo';
 import Sandbox from './components/Sandbox';
+import Splash from './components/Splash';
 
 export default function App() {
   const [todos, setTodos] = useState([
     {text: 'this is a todo', key: '1', completeStatus: false},
     {text: 'sample-task', key: '2', completeStatus: false},
-    {text: 'tap me to delete', key: '3', completeStatus: true}
+    {text: 'press check to delete', key: '3', completeStatus: true}
   ])
+  const [status, setStatus] = useState(true)
   const pressHandler = (action, key) => {
     switch(action){
       case 'delete':
         setTodos((prevTodos)=>{
             return prevTodos.filter(todo=>todo.key!=key)
         });
+        break;
+      case 'removeSplash':
+        setStatus(false);
         break;
       case 'toggle':
         const temp = []
@@ -42,26 +47,25 @@ export default function App() {
     })
   }
   return (
-    // <Sandbox/>
     <TouchableWithoutFeedback onPress={()=>{
       Keyboard.dismiss();
-      console.log('dismissed keyboard');
     }}>
-      <View style={styles.container}>
-        {/* header */}
-        <StatusBar style="light" />
-        <Header/>
-        <AddTodo submitHandler={submitHandler}/>
-        <View style={styles.bodycontent}>
-          {/* flatlist */}
-          <FlatList
-            data={todos}
-            renderItem={({item})=>(
-              <TodoItem item={item} pressHandler={pressHandler}/>
-            )}
-          />
+      {status===true ?
+        <Splash pressHandler={pressHandler}/> :
+        <View style={styles.container}>
+          <StatusBar style="light" />
+          <Header/>
+          <AddTodo submitHandler={submitHandler}/>
+          <View style={styles.bodycontent}>
+            <FlatList
+              data={todos}
+              renderItem={({item})=>(
+                <TodoItem item={item} pressHandler={pressHandler}/>
+              )}
+            />
+          </View>
         </View>
-      </View>
+      }
     </TouchableWithoutFeedback>
   );
 }
@@ -76,7 +80,6 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 0,
     marginBottom: 20,
-    // backgroundColor: 'cyan',
     flex: 1
   }
 });
