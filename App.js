@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
@@ -41,9 +41,6 @@ export default function App() {
         completeStatus: false}]
     })
   }
-  useEffect(()=>{
-    console.log(todos);
-  }, [todos])
   return (
     // <Sandbox/>
     <TouchableWithoutFeedback onPress={()=>{
